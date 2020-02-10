@@ -3,49 +3,11 @@
  Template Name: Room introduction
  */
 ?>
+<?php $tienIch = get_field('tien_ich'); ?>
 <?php the_post(); ?>
 <?php get_header() ?>
 <body class="">
-<header class="aio_wrapper header header_desktop">
-	<div class="midle_header">
-		<div class="container">
-			<div class="logo">
-				<a href="https://theparkhome.vn/" class="logo_link">
-					<img class="logo_img"
-						 src="https://theparkhome.vn/wp-content/uploads/2019/10/logo-the-park-home.jpg"
-						 alt="theparkhome.vn">
-				</a>
-			</div>
-			<div class="hotline_number">
-				<a href="tel:0913.909.155">
-					<label>Đường dây nóng:</label><span>0913.909.155</span>
-				</a>
-			</div>
-			<nav class="hidden-xs nav nav__primary clearfix">
-				<ul id="topnav" class="sf-menu">
-					<li id="menu-item-132"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-132">
-						<a href="https://theparkhome.vn/">Trang chủ</a></li>
-					<li id="menu-item-372"
-						class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-370 current_page_item menu-item-372">
-						<a href="https://theparkhome.vn/vi-tri-the-park-home/" aria-current="page">Vị trí</a></li>
-					<li id="menu-item-135"
-						class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135"><a
-								href="https://theparkhome.vn/tien-ich-the-park-home/">Tiện ích</a></li>
-					<li id="menu-item-137"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137"><a
-								href="https://theparkhome.vn/mat-bang-the-park-home/">Căn hộ</a></li>
-					<li id="menu-item-375"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-375"><a
-								href="https://theparkhome.vn/gia-ban-the-park-home/">Giá bán</a></li>
-					<li id="menu-item-134"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-134"><a
-								href="https://theparkhome.vn/lien-he-mua-the-park-home/">Liên hệ</a></li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</header>
+<?php get_template_part('top', 'header'); ?>
 <div class="aio_wrapper aio_content_page">
 	<div class="background_product_cat">
 		<div class="has_thumbnail">
@@ -103,19 +65,16 @@
 				<div class="wow fadeInUp col-xs-12 col-sm-6" data-wow-delay="0.5s">
 					<div class="canho_meta">
 						<div class="phongngu_dientich">
-							<div class="sophongngu">2 phòng ngủ</div>
-							<div class="dientich">80 m2</div>
+							<div class="sophongngu"><?= get_field('so_phong_ngu') ?> phòng ngủ</div>
+							<div class="dientich"><?= get_field('dien_tich') ?> m2</div>
 						</div>
 						<div class="tienich_canho">
 							<div class="title"><span>Tiện ích</span></div>
 							<div class="content_tienich">
 								<ul>
-									<li>Sàn gỗ Janmi</li>
-									<li>Chuông Honeywell</li>
-									<li>Báo cháy Simplex</li>
-									<li>Điều hòa Mitsubishi</li>
-									<li>Kính hộp hệ Xingfa</li>
-									<li>Trần thạch cao Zinca</li>
+									<?php foreach($tienIch as $item) : ?>
+										<li><?= $item ?></li>
+									<?php endforeach; ?>
 								</ul>
 							</div>
 						</div>
@@ -130,25 +89,37 @@
 		<div class="wow fadeInUp title_hinhanh" data-wow-delay="0.2s">Hình ảnh căn hộ</div>
 		<ul class="row image_single">
 			<?php for($i=1; $i<=6; $i++) : ?>
-				<li class="wow fadeInUp col-xs-6 col-sm-4">
-					<a href="#"
-					   class="zoom_img">
-						<div class="ajax_image"
-							 data-image="<?php the_field( "hinh_anh_can_ho$i" ) ?>"
-							 data-title="Căn hộ 2 phòng ngủ2"></div>
-					</a>
-				</li>
+				<?php if($image = get_field( "hinh_anh_can_ho$i" )) : ?>
+					<li class="wow fadeInUp col-xs-6 col-sm-4">
+						<a href="#"
+						   class="zoom_img">
+							<div class="ajax_image"
+								 data-image="<?= $image ?>"
+								 data-title=""></div>
+						</a>
+					</li>
+				<?php endif ?>
 			<?php endfor; ?>
 		</ul>
 	</div>
 	<div class="next_prew">
 		<div class="container">
-			<div class="prew_post">
-				<a class="post_title" href="https://theparkhome.vn/can-ho-3-phong-ngu-86-m2/">
-					<label><i class="fa fa-reply"></i></label>
-					<span>Căn hộ 3 phòng ngủ 86 m2</span>
-				</a>
-			</div>
+			<?php if($prevPost = get_previous_post()) : ?>
+				<div class="prew_post">
+					<a class="post_title" href="<?= get_post_permalink($prevPost->ID) ?>">
+						<label><i class="fa fa-reply"></i></label>
+						<span><?= $prevPost->post_title ?></span>
+					</a>
+				</div>
+			<?php endif; ?>
+			<?php if($nextPost = get_next_post()) : ?>
+				<div class="next_post">
+					<a class="post_title" href="<?= get_post_permalink($nextPost->ID) ?>">
+						<label><i class="fa fa-share"></i></label>
+						<span><?= $nextPost->post_title ?></span>
+					</a>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
