@@ -12,7 +12,7 @@ services:
       '--collation-server=utf8mb4_unicode_ci'
     ]
     volumes:
-      - db_data:/var/lib/mysql:rw
+      - .data/mysql:/var/lib/mysql:rw
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_ROOT_PASSWORD: 123456
@@ -37,5 +37,5 @@ services:
       DB_HOST: db
       WP_DEBUG: 1
 
-volumes:
-  db_data: # store database into a volume so that we can pause the containers
+#volumes:
+#  db_data: # store database into a volume so that we can pause the containers
