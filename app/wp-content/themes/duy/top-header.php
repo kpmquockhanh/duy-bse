@@ -20,7 +20,7 @@
 				'container_class' => 'nav__primary clearfix hidden-xs',
 				'menu_class' => 'sf-menu',
 				'menu_id' => 'topnav',
-
+				'fallback_cb' => false
 			]); ?>
 <!--			<nav class="hidden-xs nav nav__primary clearfix">-->
 <!--				<ul id="topnav" class="sf-menu">-->
