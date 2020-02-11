@@ -1660,6 +1660,7 @@ article .post_content ul,article .post_content ol{
 	color: #333;
 	font-weight: 700;
 	position: relative;
+	line-height: 36px;
 }
 #gioithieu .widget-title:after,#canho .widget-title:after,#vitri .widget-title:after{
 	position: absolute;
@@ -2178,6 +2179,7 @@ article .post_content ul,article .post_content ol{
     margin: 0px auto 20px auto;
     padding: 0px 0px 20px 0px;
     text-align: center;
+	line-height: 36px;	
 }
 #dangkythongtin .widget-title:after{
     position: absolute;

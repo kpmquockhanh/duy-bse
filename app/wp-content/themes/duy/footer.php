@@ -1,8 +1,6 @@
 </html>
-
+<?php wp_footer(); ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
-<script type='text/javascript' src='https://theparkhome.vn/wp-content/themes/aioframework/assets/js/slick.js'></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
     jQuery('#aioslider_106').slick({
         dots: false,

@@ -11,8 +11,8 @@
 					</a>
 				</div>
 				<div class="hotline_number">
-					<a href="tel:0913.909.155">
-						<label>Đường dây nóng:</label><span>0913.909.155</span>
+					<a href="tel:<?= get_theme_mod('owner_phone')?>">
+						<label>Đường dây nóng:</label><span><?= get_theme_mod('owner_phone')?></span>
 					</a>
 				</div>
 				<nav class="hidden-xs nav nav__primary clearfix">
@@ -1061,14 +1061,19 @@
 										</figure>
 										<div class="aio_image_meta">
 											<div class="desc">
-												<p><span style="color: #ffffff;">Địa chỉ:   Lô N02 - Ô D12 Khu đô thị mới Cầu Giấy, Hà Nội</span>
+												<p>
+													<span style="color: #ffffff;">Địa chỉ: <?= get_theme_mod('owner_address') ?></span>
 												</p>
-												<p><span style="color: #ffffff;">Hotline:   0913.909.155</span></p>
-												<p><span style="color: #ffffff;">Email:     Ngocuoc163@gmail.com</span>
+												<p>
+													<span style="color: #ffffff;">Hotline: <?= get_theme_mod('owner_phone') ?></span>
 												</p>
-												<p><span style="color: #ffffff;">Website: <a style="color: #ffffff;"
-												                                             href="https://theparkhome.vn/">Theparkhome.vn</a></span>
-												</p></div>
+												<p>
+													<span style="color: #ffffff;">Email: <?= get_bloginfo('admin_email') ?></span>
+												</p>
+												<p>
+													<span style="color: #ffffff;">Website: <a style="color: #ffffff;" href="<?= get_bloginfo('url') ?>"><?= get_bloginfo('url') ?></a></span>
+												</p>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -1118,9 +1123,9 @@
 	<div class="fixed_custom_contact">
 		<ul>
 			<li class="chat_facebook"><a href="https://m.me/Uocdn" target="_blank"></a></li>
-			<li class="call_zalo"><a href="http://zalo.me/0913.909.155" target="_blank">0913.909.155</a></li>
+			<li class="call_zalo"><a href="http://zalo.me/<?= get_theme_mod('owner_phone')?>" target="_blank"><?= get_theme_mod('owner_phone')?></a></li>
 			<li class="call_phone">
-				<a href="tel:0913.909.155">
+				<a href="tel:<?= get_theme_mod('owner_phone')?>">
 					<div class="phone_animation">
 						<div class="phone_animation_circle_fill_img"></div>
 					</div>

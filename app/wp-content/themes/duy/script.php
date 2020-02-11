@@ -1,13 +1,4 @@
-<script
-	src="https://code.jquery.com/jquery-1.12.4.min.js"
-	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-	crossorigin="anonymous"></script>
-<script type='text/javascript'
-        src='https://theparkhome.vn/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
-<script type='text/javascript' src='https://theparkhome.vn/wp-includes/js/wp-embed.min.js?ver=5.2.5'></script>
 <script type="text/javascript">document.body.className = document.body.className.replace("siteorigin-panels-before-js", "");</script>
-<script type='text/javascript'
-        src='https://theparkhome.vn/wp-content/themes/aioframework/assets/js/page.js'></script>
 <script type="text/javascript" defer>
     jQuery(document).ready(function () {
         jQuery('.ajax_image[data-image]').bind('load', img_load_complete);

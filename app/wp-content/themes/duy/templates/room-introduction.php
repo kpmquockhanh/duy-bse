@@ -7,7 +7,7 @@
 <?php the_post(); ?>
 <?php get_header() ?>
 <body class="">
-<?php get_template_part('top', 'header'); ?>
+<?php get_template_part('header', 'content'); ?>
 <div class="aio_wrapper aio_content_page">
 	<div class="background_product_cat">
 		<div class="has_thumbnail">
@@ -128,9 +128,9 @@
 <div class="fixed_custom_contact">
 	<ul>
 		<li class="chat_facebook"><a href="https://m.me/Uocdn" target="_blank"></a></li>
-		<li class="call_zalo"><a href="http://zalo.me/0913.909.155" target="_blank">0913.909.155</a></li>
+		<li class="call_zalo"><a href="http://zalo.me/<?= get_theme_mod('owner_phone')?>" target="_blank"><?= get_theme_mod('owner_phone')?></a></li>
 		<li class="call_phone">
-			<a href="tel:0913.909.155">
+			<a href="tel:<?= get_theme_mod('owner_phone')?>">
 				<div class="phone_animation">
 					<div class="phone_animation_circle_fill_img"></div>
 				</div>

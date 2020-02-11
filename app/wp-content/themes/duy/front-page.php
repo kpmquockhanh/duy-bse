@@ -1,9 +1,20 @@
 <?php
+	$categories = get_terms( 'category', [
+		'search' => 'tong-quan'
+	]);
 
+	$room_pages = get_posts(
+		[
+            'post_type' => 'page',
+            'meta_key' => '_wp_page_template',
+            'meta_value' => 'templates/room-introduction.php',
+			'number' => 4
+		]
+	);
 ?>
 <?php get_header(); ?>
 	<body class="home desktop">
-	<?php get_template_part('top', 'header'); ?>
+	<?php get_template_part('header', 'content'); ?>
 	<div class="clearfix">
 		<div class="content_page">
 			<div id="pl-27" class="panel-layout">
@@ -19,7 +30,7 @@
 											<div class="content_item">
 												<div class="image_banner"><a href="<?= get_site_url() ?>">
 														<div class="ajax_image"
-															 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-1400x650.jpg"
+															 data-image="<?= get_theme_mod('homepage_banner') ?>"
 															 data-title="banner_106_1"></div>
 													</a></div>
 											</div>
@@ -30,40 +41,40 @@
 						</div>
 					</div>
 				</div>
-				<div id="pg-27-1" class="panel-grid panel-has-style">
-					<div id="gioithieu" class="panel-row-style panel-row-style-for-27-1">
-						<div id="pgc-27-1-0" class="panel-grid-cell">
-							<div id="panel-27-1-0-0"
-								 class="so-panel widget widget_aio_single_image aio_single_image panel-first-child panel-last-child"
-								 data-index="1">
-								<div class="container panel-widget-style panel-widget-style-for-27-1-0-0">
-									<div id="aio-widget-aio_single_image-2720007-template" class="aio_single_image">
-										<div class="content_image">
-											<figure class="featured-thumbnail thumbnail">
-												<a href="https://theparkhome.vn/gioi-thieu/">
-													<div class="ajax_image"
-														 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-1-1.jpg"
-														 data-title="aio_single_image_aio-widget-aio_single_image-2720007-template"></div>
-												</a></figure>
-											<div class="aio_image_meta">
-												<div class="widget-title"><span>The Park Home</span></div>
-												<div class="desc">
-													<h3>Nơi cuộc sống tạo nên vẻ đẹp</h3>
-													<div><strong><a href="https://theparkhome.vn/">THE PARK HOME</a> -
-															Nhà ở cho Cán bộ Chiến sỹ Cục Cảnh sát Bảo vệ Bộ công
-															an</strong> là dự án chung cư cao cấp tại khu đô thị mới Cầu
-														Giấy đánh dấu bước đột phá khi gia nhập thị trường đầu tư - kinh
-														doanh bất động sản của HANDICO 52.
+				<?php if(count($categories)): $homepage_posts = get_posts([
+						'category' => $categories[0]->term_id
+                ]);?>
+<!--					Get post by category-->
+					<?php foreach ($homepage_posts as $index => $homepage_post) : ?>
+						<div class="panel-grid panel-has-style">
+							<div id="<?= $index % 2 ? 'vitri' : 'gioithieu'?>" class="panel-row-style">
+								<div class="panel-grid-cell">
+									<div
+										 class="so-panel widget widget_aio_single_image aio_single_image panel-first-child panel-last-child"
+										 data-index="1">
+										<div class="container panel-widget-style panel-widget-style-for-27-1-0-0">
+											<div id="aio-widget-aio_single_image-2720007-template" class="aio_single_image">
+												<div class="content_image">
+													<figure class="featured-thumbnail thumbnail">
+														<a href="<?= get_the_permalink($homepage_post->ID) ?>">
+															<div class="ajax_image"
+																 data-image="<?= get_the_post_thumbnail_url($homepage_post->ID)?>"
+																 data-title="aio_single_image_aio-widget-aio_single_image-2720007-template"></div>
+														</a></figure>
+													<div class="aio_image_meta">
+														<div class="widget-title"><span><?= get_the_title($homepage_post->ID) ?></span></div>
+														<div class="desc">
+
+															<div>
+																<?= get_the_excerpt($homepage_post->ID) ?>
+															</div>
+														</div>
+														<div class="read_more">
+															<a href="<?= get_the_permalink($homepage_post->ID) ?>">
+																<span>Xem chi tiết</span>
+															</a>
+														</div>
 													</div>
-													<div>Dự án được chúng tôi quan tâm chăm lo từ những chi tiết nhỏ
-														nhất, chọn lọc những sản phẩm giàu giá trị văn hoá đưa vào sử
-														dụng hiệu quả để tạo nên tiêu chuẩn sống hiện đại cho cư dân. .
-													</div>
-												</div>
-												<div class="read_more">
-													<a href="https://theparkhome.vn/gioi-thieu/">
-														<span>Xem chi tiết</span>
-													</a>
 												</div>
 											</div>
 										</div>
@@ -71,48 +82,9 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div id="pg-27-2" class="panel-grid panel-has-style">
-					<div id="vitri" class="panel-row-style panel-row-style-for-27-2">
-						<div id="pgc-27-2-0" class="panel-grid-cell">
-							<div id="panel-27-2-0-0"
-								 class="so-panel widget widget_aio_single_image aio_single_image panel-first-child panel-last-child"
-								 data-index="2">
-								<div class="container panel-widget-style panel-widget-style-for-27-2-0-0">
-									<div id="aio-widget-aio_single_image-2720007-template" class="aio_single_image">
-										<div class="content_image">
-											<figure class="featured-thumbnail thumbnail">
-												<a href="https://theparkhome.vn/vi-tri-the-park-home/">
-													<div class="ajax_image"
-														 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/vi-tri-chung-cu-the-park-home-handico-52.jpg"
-														 data-title="aio_single_image_aio-widget-aio_single_image-2720007-template"></div>
-												</a></figure>
-											<div class="aio_image_meta">
-												<div class="widget-title"><span>Vị trí</span></div>
-												<div class="desc">
-													<p><strong><a href="https://theparkhome.vn/">CHUNG CƯ THE PARK
-																HOME</a> </strong>tọa lạc ngay tại Lô N02, Ô D12  Khu đô
-														thị mới Cầu Giấy, Phường Dịch Vọng, Quận Cầu Giấy, Hà Nội – vị
-														trí đắc địa, đây là vị trí đẹp nhất trên trục đường trung tậm
-														Quận Cầu Giấy hiện nay.</p>
-													<p>Hệ thống giao thông tại khu vực này được quy hoạch rất đồng bộ,
-														hệ thống tiện ích cảnh quan cây xanh đầy đủ, hệ thống giáo dục
-														trường học cơ quan ban ngành nằm ngay liền kề …</p></div>
-												<div class="read_more">
-													<a href="https://theparkhome.vn/vi-tri-the-park-home/">
-														<span>Xem chi tiết</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="pg-27-3" class="panel-grid panel-has-style">
+					<?php endforeach; ?>
+				<?php endif ?>
+				<div class="panel-grid panel-has-style">
 					<div id="canho" class="panel-row-style panel-row-style-for-27-3">
 						<div id="pgc-27-3-0" class="panel-grid-cell">
 							<div id="panel-27-3-0-0"
@@ -122,72 +94,49 @@
 									<div class="widget-title"><span>Căn hộ điển hình</span></div>
 									<div class="textwidget custom-html-widget">
 										<div class="canho canho_template_">
-											<div class=" list_canho">
+											<?php foreach($room_pages as $room_page): ?>
+												<div class=" list_canho">
 												<div class="content_item">
 													<div class="col-xs-12 col-sm-6 slide_canho l_item">
 														<ul class="slide_top">
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2018/10/can-ho-2-ngu-chung-cu-the-park-home-1-580x370.jpg"
-																	 data-title="Căn hộ 2 phòng ngủ"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2018/10/can-ho-2-ngu-chung-cu-the-park-home-1.jpg"
-																	 data-title="Căn hộ 2 phòng ngủ2"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2018/10/can-ho-2-ngu-chung-cu-the-park-home-2.jpg"
-																	 data-title="Căn hộ 2 phòng ngủ3"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2018/10/can-ho-2-ngu-chung-cu-the-park-home-3.jpg"
-																	 data-title="Căn hộ 2 phòng ngủ4"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-3.jpg"
-																	 data-title="Căn hộ 2 phòng ngủ5"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-4.jpg"
-																	 data-title="Căn hộ 2 phòng ngủ6"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-4-ngu-4.jpg"
-																	 data-title="Căn hộ 2 phòng ngủ7"></div>
-															</li>
+                                                            <?php for($i=1; $i<=6; $i++) : ?>
+                                                                <?php if($image = $room_page->{"hinh_anh_can_ho$i"} ) : ?>
+																	<li>
+																		<div class="ajax_image"
+																			 data-image="<?= wp_get_attachment_image_url($room_page->mat_bang) ?>"
+																			 data-title="Căn hộ 2 phòng ngủ">
+																		</div>
+																	</li>
+                                                                <?php endif ?>
+                                                            <?php endfor; ?>
 														</ul>
 													</div>
 													<div class="col-xs-12 col-sm-6 r_canho">
 														<div class="canho_meta">
-															<div class="post-list_h"><a class="post-title"
-																						href="https://theparkhome.vn/can-ho-2-phong-ngu/"
-																						rel="bookmark"
-																						title="Căn hộ 2 phòng ngủ">Căn
-																	hộ 2 phòng ngủ</a></div>
+															<div class="post-list_h">
+																<a class="post-title" href="<?= get_permalink($room_page->ID) ?>" rel="bookmark" title="<?= get_the_title($room_page->ID) ?>">
+																	<?= get_the_title($room_page->ID) ?>
+																</a>
+															</div>
 															<div class="phongngu_dientich">
-																<div class="sophongngu">2 phòng ngủ</div>
-																<div class="dientich">80 m2</div>
-																<div class="chitiet"><a
-																			href="https://theparkhome.vn/can-ho-2-phong-ngu/">Xem
-																		chi tiết</a></div>
+																<div class="sophongngu"><?= $room_page->so_phong_ngu ?> phòng ngủ</div>
+																<div class="dientich"><?= $room_page->dien_tich ?> m2</div>
+																<div class="chitiet">
+																	<a href="<?= get_permalink($room_page->ID) ?>">
+																		Xem chi tiết
+																	</a>
+																</div>
 															</div>
 															<div class="matbang_vitri">
 																<div class="matbang">
 																	<div class="ajax_image"
-																		 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-2-ngu.jpg"
-																		 data-title="Căn hộ 2 phòng ngủ-matbang"></div>
+																		 data-image="<?= wp_get_attachment_image_url($room_page->mat_bang) ?>"
+																		 data-title="<?= get_the_title($room_page->ID) ?>-matbang"></div>
 																</div>
 																<div class="vitri">
 																	<div class="ajax_image"
-																		 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/mat-bang-can-ho-chung-cu-the-park-home-cau-giay.jpg"
-																		 data-title="Căn hộ 2 phòng ngủ-vitri">
-
+																		 data-image="<?= wp_get_attachment_image_url($room_page->vi_tri) ?>"
+																		 data-title="<?= get_the_title($room_page->ID) ?>-vitri">
 																	</div>
 																</div>
 															</div>
@@ -195,228 +144,8 @@
 													</div>
 												</div>
 											</div>
-											<div class=" list_canho">
-												<div class="content_item">
-													<div class="col-xs-12 col-sm-6 slide_canho l_item">
-														<ul class="slide_top">
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-1-580x370.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 86 m2"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-1.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 86 m22"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-2-1.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 86 m23"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-3.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 86 m24"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-4.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 86 m25"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-5.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 86 m26"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-6.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 86 m27"></div>
-															</li>
-														</ul>
-													</div>
-													<div class="col-xs-12 col-sm-6 r_canho">
-														<div class="canho_meta">
-															<div class="post-list_h"><a class="post-title"
-																						href="https://theparkhome.vn/can-ho-3-phong-ngu-86-m2/"
-																						rel="bookmark"
-																						title="Căn hộ 3 phòng ngủ 86 m2">Căn
-																	hộ 3 phòng ngủ 86 m2</a></div>
-															<div class="phongngu_dientich">
-																<div class="sophongngu">3 phòng ngủ</div>
-																<div class="dientich">86 m2</div>
-																<div class="chitiet"><a
-																			href="https://theparkhome.vn/can-ho-3-phong-ngu-86-m2/">Xem
-																		chi tiết</a></div>
-															</div>
-															<div class="matbang_vitri">
-																<div class="matbang">
-																	<div class="ajax_image"
-																		 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-3-ngu-86-m2.jpg"
-																		 data-title="Căn hộ 3 phòng ngủ 86 m2-matbang"></div>
-																</div>
-																<div class="vitri">
-																	<div class="ajax_image"
-																		 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/mat-bang-can-ho-chung-cu-the-park-home-cau-giay.jpg"
-																		 data-title="Căn hộ 3 phòng ngủ 86 m2-vitri">
-
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class=" list_canho">
-												<div class="content_item">
-													<div class="col-xs-12 col-sm-6 slide_canho l_item">
-														<ul class="slide_top">
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/can-ho-3-ngu-chung-cu-the-park-home-1-580x370.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 107 m2"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/can-ho-3-ngu-chung-cu-the-park-home-1.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 107 m22"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/can-ho-3-ngu-chung-cu-the-park-home-2.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 107 m23"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/can-ho-3-ngu-chung-cu-the-park-home-3.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 107 m24"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/can-ho-3-ngu-chung-cu-the-park-home-4.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 107 m25"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/can-ho-3-ngu-chung-cu-the-park-home-5.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 107 m26"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/can-ho-3-ngu-chung-cu-the-park-home-6.jpg"
-																	 data-title="Căn hộ 3 phòng ngủ 107 m27"></div>
-															</li>
-														</ul>
-													</div>
-													<div class="col-xs-12 col-sm-6 r_canho">
-														<div class="canho_meta">
-															<div class="post-list_h"><a class="post-title"
-																						href="https://theparkhome.vn/can-ho-3-phong-ngu-107-m2/"
-																						rel="bookmark"
-																						title="Căn hộ 3 phòng ngủ 107 m2">Căn
-																	hộ 3 phòng ngủ 107 m2</a></div>
-															<div class="phongngu_dientich">
-																<div class="sophongngu">3 phòng ngủ</div>
-																<div class="dientich">107 m2</div>
-																<div class="chitiet"><a
-																			href="https://theparkhome.vn/can-ho-3-phong-ngu-107-m2/">Xem
-																		chi tiết</a></div>
-															</div>
-															<div class="matbang_vitri">
-																<div class="matbang">
-																	<div class="ajax_image"
-																		 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-107-m2.jpg"
-																		 data-title="Căn hộ 3 phòng ngủ 107 m2-matbang"></div>
-																</div>
-																<div class="vitri">
-																	<div class="ajax_image"
-																		 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/mat-bang-can-ho-chung-cu-the-park-home-cau-giay.jpg"
-																		 data-title="Căn hộ 3 phòng ngủ 107 m2-vitri">
-
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class=" list_canho">
-												<div class="content_item">
-													<div class="col-xs-12 col-sm-6 slide_canho l_item">
-														<ul class="slide_top">
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-2-580x370.jpg"
-																	 data-title="Căn hộ 4 phòng ngủ"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-2.jpg"
-																	 data-title="Căn hộ 4 phòng ngủ2"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-4-ngu-1.jpg"
-																	 data-title="Căn hộ 4 phòng ngủ3"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-4-ngu-2.jpg"
-																	 data-title="Căn hộ 4 phòng ngủ4"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-4-ngu-4.jpg"
-																	 data-title="Căn hộ 4 phòng ngủ5"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-4-ngu-5.jpg"
-																	 data-title="Căn hộ 4 phòng ngủ6"></div>
-															</li>
-															<li>
-																<div class="ajax_image"
-																	 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-4-ngu-6.jpg"
-																	 data-title="Căn hộ 4 phòng ngủ7"></div>
-															</li>
-														</ul>
-													</div>
-													<div class="col-xs-12 col-sm-6 r_canho">
-														<div class="canho_meta">
-															<div class="post-list_h"><a class="post-title"
-																						href="https://theparkhome.vn/can-ho-4-phong-ngu/"
-																						rel="bookmark"
-																						title="Căn hộ 4 phòng ngủ">Căn
-																	hộ 4 phòng ngủ</a></div>
-															<div class="phongngu_dientich">
-																<div class="sophongngu">4 phòng ngủ</div>
-																<div class="dientich">154 m2</div>
-																<div class="chitiet"><a
-																			href="https://theparkhome.vn/can-ho-4-phong-ngu/">Xem
-																		chi tiết</a></div>
-															</div>
-															<div class="matbang_vitri">
-																<div class="matbang">
-																	<div class="ajax_image"
-																		 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-4-ngu.jpg"
-																		 data-title="Căn hộ 4 phòng ngủ-matbang"></div>
-																</div>
-																<div class="vitri">
-																	<div class="ajax_image"
-																		 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/mat-bang-can-ho-chung-cu-the-park-home-cau-giay.jpg"
-																		 data-title="Căn hộ 4 phòng ngủ-vitri">
-
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+											<?php endforeach; ?>
 										</div>
-
-
 									</div>
 								</div>
 							</div>
@@ -545,9 +274,9 @@
 													 class="so-panel widget widget_black-studio-tinymce widget_black_studio_tinymce panel-first-child panel-last-child"
 													 data-index="3">
 													<div class="textwidget"><p>&nbsp;</p>
-														<p><img class="size-full wp-image-866 aligncenter"
-																src="https://theparkhome.vn/wp-content/uploads/2019/10/hotline-1.png"
-																alt="" width="300" height="62"/></p>
+														<h2 style="color: red; margin: auto; text-align: center">
+                                                            <?= get_theme_mod('owner_phone') ?>
+														</h2>
 														<p style="text-align: center;"><span
 																	style="color: #000000;"><strong>KHÁCH HÀNG LIÊN HỆ TRỰC TIẾP ĐỂ NHẬN THÔNG TIN CHUẨN GIÁ BÁN VÀ CHÍNH SÁCH MỞ BÁN</strong></span>
 														</p>
@@ -650,6 +379,12 @@
 						</div>
 					</div>
 				</div>
+                <?php
+                $chudautu = get_posts( array(
+                    'name' => 'chu-dau-tu'
+                ));
+                ?>
+                <?php if(count($chudautu)): $chudautu = $chudautu[0] ?>
 				<div id="pg-27-6" class="panel-grid panel-has-style">
 					<div id="chudautu" class="panel-row-style panel-row-style-for-27-6">
 						<div id="pgc-27-6-0" class="panel-grid-cell">
@@ -663,19 +398,15 @@
 											<figure class="featured-thumbnail thumbnail">
 												<a href="https://theparkhome.vn/chu-dau-tu/">
 													<div class="ajax_image"
-														 data-image="https://theparkhome.vn/wp-content/uploads/2018/10/image_chudautu.jpg"
+														 data-image="<?= get_the_post_thumbnail_url($chudautu->ID) ?>"
 														 data-title="aio_single_image_aio-widget-aio_single_image-2720007-template"></div>
 												</a></figure>
 											<div class="aio_image_meta">
 												<div class="desc">
-													<p style="text-align: justify;"><span
-																style="font-family: arial, helvetica, sans-serif; font-size: 14px; color: #000000;"><strong>CÔNG TY CP ĐẦU TƯ VÀ PHÁT TRIỂN NHÀ HÀ NỘI SỐ 52 (HANDICO52)</strong> là đơn vị thành viên của Tổng Công ty Đầu tư và Phát triển nhà Hà Nội (HANDICO), hoạt động trên các lĩnh vực chính là Xây lắp và Đầu tư kinh doanh Bất động sản.</span>
-													</p>
-													<p style="text-align: justify;"><span
-																style="font-family: arial, helvetica, sans-serif; font-size: 14px; color: #000000;">Trong các lĩnh vực kinh doanh, <strong>HANDICO 52</strong> đã khẳng định uy tín, thương hiệu trên thị trường, giá trị sản xuất kinh doanh không ngừng gia tăng, thị trường, thị phần được mở rộng trên phạm vi toàn quốc.</span>
-													</p></div>
+													<?= get_the_excerpt($chudautu->ID) ?>
+												</div>
 												<div class="read_more">
-													<a href="https://theparkhome.vn/chu-dau-tu/">
+													<a href="<?= get_permalink($chudautu->ID) ?>">
 														<span>Xem chi tiết</span>
 													</a>
 												</div>
@@ -687,255 +418,260 @@
 						</div>
 					</div>
 				</div>
-				<div id="pg-27-7" class="panel-grid panel-has-style">
-					<div id="thuvienanh" class="panel-row-style panel-row-style-for-27-7">
-						<div id="pgc-27-7-0" class="panel-grid-cell">
-							<div id="panel-27-7-0-0"
-								 class="so-panel widget widget_black-studio-tinymce widget_black_studio_tinymce panel-first-child"
-								 data-index="8">
-								<div class="container text_custom panel-widget-style panel-widget-style-for-27-7-0-0">
-									<div class="widget-title"><span>Thư viện ảnh</span></div>
-									<div class="textwidget"><p style="text-align: justify;"><span
-													style="font-size: 14px;"><strong><a href="https://theparkhome.vn/">CHUNG CƯ THE PARK HOME</a> - Nhà ở CBCS Cục Cảnh sát Bảo vệ Bộ công an</strong> là một trong những dự án sở hữu vị trí đắc địa tại Cầu giấy cũng như của Hà Nội. Tọa lạc ngay tại Lô N02, Ô đất D12 – Khu đô thị mới Cầu Giấy – Q. Cầu Giấy – Hà Nội nằm trên trục đường trung tâm và đẹp nhất khu vực quận Cầu Giấy hiện nay.</span>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div id="panel-27-7-0-1"
-								 class="so-panel widget widget_siteorigin-panels-builder panel-last-child"
-								 data-index="9">
-								<div class="container panel-widget-style panel-widget-style-for-27-7-0-1">
-									<div id="pl-w5db151fe0c779" class="panel-layout">
-										<div id="pg-w5db151fe0c779-0" class="panel-grid panel-no-style">
-											<div id="pgc-w5db151fe0c779-0-0" class="panel-grid-cell">
-												<div id="panel-w5db151fe0c779-0-0-0"
-													 class="widget_text so-panel widget widget_custom_html panel-first-child panel-last-child"
-													 data-index="0">
-													<div class="textwidget custom-html-widget">
-														<iframe width="560" height="360"
-																src="https://www.youtube.com/embed/kz8zeYgptIc"
-																frameborder="0"
-																allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-																allowfullscreen></iframe>
-													</div>
-												</div>
-											</div>
-											<div id="pgc-w5db151fe0c779-0-1" class="panel-grid-cell">
-												<div id="panel-w5db151fe0c779-0-1-0"
-													 class="so-panel widget widget_postcustom my_posts_type_widget panel-first-child panel-last-child"
-													 data-index="1">
-													<ul class='default_post post-list unstyled'>
-														<li class="wow fadeInUp list_item_1 col-xs-6 col-sm-6 col-md-6"
-															data-wow-delay="0.2s">
-															<div class="content_item">
-																<figure class="featured-thumbnail thumbnail">
-																	<a href="https://theparkhome.vn/mau-can-ho-2-ngu-the-park-home/">
-																		<div class="ajax_image"
-																			 data-image="https://theparkhome.vn/wp-content/uploads/2018/10/can-ho-2-ngu-chung-cu-the-park-home-1-360x240.jpg"
-																			 data-title="Mẫu căn hộ cao cấp 2 ngủ"></div>
-																	</a>
-																</figure>
-																<div class="post-list_h"><a class="post-title"
-																							href="https://theparkhome.vn/mau-can-ho-2-ngu-the-park-home/"
-																							rel="bookmark"
-																							title="Mẫu căn hộ cao cấp 2 ngủ">Mẫu
-																		căn hộ cao cấp 2 ngủ</a></div>
-															</div>
-														</li><!--//.post-list_li -->
-														<li class="wow fadeInUp list_item_2 col-xs-6 col-sm-6 col-md-6"
-															data-wow-delay="0.3s">
-															<div class="content_item">
-																<figure class="featured-thumbnail thumbnail">
-																	<a href="https://theparkhome.vn/mau-can-ho-3-ngu-the-park-home/">
-																		<div class="ajax_image"
-																			 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-2-360x240.jpg"
-																			 data-title="Mẫu căn hộ cao cấp 3 ngủ"></div>
-																	</a>
-																</figure>
-																<div class="post-list_h"><a class="post-title"
-																							href="https://theparkhome.vn/mau-can-ho-3-ngu-the-park-home/"
-																							rel="bookmark"
-																							title="Mẫu căn hộ cao cấp 3 ngủ">Mẫu
-																		căn hộ cao cấp 3 ngủ</a></div>
-															</div>
-														</li><!--//.post-list_li -->
-														<li class="wow fadeInUp list_item_3 col-xs-6 col-sm-6 col-md-6"
-															data-wow-delay="0.4s">
-															<div class="content_item">
-																<figure class="featured-thumbnail thumbnail">
-																	<a href="https://theparkhome.vn/mau-can-ho-3-ngu-the-park-home-2/">
-																		<div class="ajax_image"
-																			 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/can-ho-3-ngu-chung-cu-the-park-home-4-360x240.jpg"
-																			 data-title="Mẫu căn hộ cao cấp 3 ngủ"></div>
-																	</a>
-																</figure>
-																<div class="post-list_h"><a class="post-title"
-																							href="https://theparkhome.vn/mau-can-ho-3-ngu-the-park-home-2/"
-																							rel="bookmark"
-																							title="Mẫu căn hộ cao cấp 3 ngủ">Mẫu
-																		căn hộ cao cấp 3 ngủ</a></div>
-															</div>
-														</li><!--//.post-list_li -->
-														<li class="wow fadeInUp list_item_4 col-xs-6 col-sm-6 col-md-6"
-															data-wow-delay="0.5s">
-															<div class="content_item">
-																<figure class="featured-thumbnail thumbnail">
-																	<a href="https://theparkhome.vn/mau-can-ho-cao-cap-4-ngu-the-park-home/">
-																		<div class="ajax_image"
-																			 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-4-ngu-1-360x240.jpg"
-																			 data-title="Mẫu căn hộ cao cấp 4 ngủ"></div>
-																	</a>
-																</figure>
-																<div class="post-list_h"><a class="post-title"
-																							href="https://theparkhome.vn/mau-can-ho-cao-cap-4-ngu-the-park-home/"
-																							rel="bookmark"
-																							title="Mẫu căn hộ cao cấp 4 ngủ">Mẫu
-																		căn hộ cao cấp 4 ngủ</a></div>
-															</div>
-														</li><!--//.post-list_li -->
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="pg-27-8" class="panel-grid panel-has-style">
-					<div id="new_home" class="panel-row-style panel-row-style-for-27-8">
-						<div id="pgc-27-8-0" class="panel-grid-cell">
-							<div id="panel-27-8-0-0"
-								 class="so-panel widget widget_postcustom my_posts_type_widget panel-first-child panel-last-child"
-								 data-index="10">
-								<div class="container panel-widget-style panel-widget-style-for-27-8-0-0">
-									<div class="widget-title"><span>Tin tức, sự kiện</span></div>
-									<ul class='default_post post-list unstyled row'>
-										<li class="wow fadeInUp list_item_1 col-xs-6 col-sm-6 col-md-4"
-											data-wow-delay="0.2s">
-											<div class="content_item">
-												<figure class="featured-thumbnail thumbnail">
-													<a href="https://theparkhome.vn/mua-can-ho-chung-cu-the-park-home-o-dau/">
-														<div class="ajax_image"
-															 data-image="https://theparkhome.vn/wp-content/uploads/2019/12/mua-can-ho-the-park-home-o-dau-360x240.jpg"
-															 data-title="Nên tìm hiểu và mua căn hộ chung cư The Park Home ở đâu ?"></div>
-													</a>
-												</figure>
-												<div class="post-list_h"><a class="post-title"
-																			href="https://theparkhome.vn/mua-can-ho-chung-cu-the-park-home-o-dau/"
-																			rel="bookmark"
-																			title="Nên tìm hiểu và mua căn hộ chung cư The Park Home ở đâu ?">Nên
-														tìm hiểu và mua căn hộ chung cư The Park Home ở đâu ?</a></div>
-												<a href="https://theparkhome.vn/mua-can-ho-chung-cu-the-park-home-o-dau/"
-												   class="btn btn-primary link">Xem thêm</a>
-											</div>
-										</li><!--//.post-list_li -->
-										<li class="wow fadeInUp list_item_2 col-xs-6 col-sm-6 col-md-4"
-											data-wow-delay="0.3s">
-											<div class="content_item">
-												<figure class="featured-thumbnail thumbnail">
-													<a href="https://theparkhome.vn/top-10-chung-cu-cao-cap-quan-cau-giay-dang-mua-nhat-2020/">
-														<div class="ajax_image"
-															 data-image="https://theparkhome.vn/wp-content/uploads/2019/11/top-10-chung-cu-cao-cap-quan-cau-giay-dang-mua-nhat-2020-360x240.jpg"
-															 data-title="TOP 10 chung cư &#8220;Cao Cấp&#8221; quận Cầu Giấy đáng mua nhất 2020"></div>
-													</a>
-												</figure>
-												<div class="post-list_h"><a class="post-title"
-																			href="https://theparkhome.vn/top-10-chung-cu-cao-cap-quan-cau-giay-dang-mua-nhat-2020/"
-																			rel="bookmark"
-																			title="TOP 10 chung cư &#8220;Cao Cấp&#8221; quận Cầu Giấy đáng mua nhất 2020">TOP
-														10 chung cư &#8220;Cao Cấp&#8221; quận Cầu Giấy đáng mua nhất
-														2020</a></div>
-												<a href="https://theparkhome.vn/top-10-chung-cu-cao-cap-quan-cau-giay-dang-mua-nhat-2020/"
-												   class="btn btn-primary link">Xem thêm</a>
-											</div>
-										</li><!--//.post-list_li -->
-										<li class="wow fadeInUp list_item_3 col-xs-6 col-sm-6 col-md-4"
-											data-wow-delay="0.4s">
-											<div class="content_item">
-												<figure class="featured-thumbnail thumbnail">
-													<a href="https://theparkhome.vn/6-chu-y-ve-dien-tich-khi-chon-mua-can-ho-chung-cu-the-park-home/">
-														<div class="ajax_image"
-															 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/dien-tich-can-ho-chung-cu-the-park-home-360x240.jpg"
-															 data-title="6 Chú ý về &#8220;diện tích&#8221; khi chọn mua căn hộ chung cư The Park Home"></div>
-													</a>
-												</figure>
-												<div class="post-list_h"><a class="post-title"
-																			href="https://theparkhome.vn/6-chu-y-ve-dien-tich-khi-chon-mua-can-ho-chung-cu-the-park-home/"
-																			rel="bookmark"
-																			title="6 Chú ý về &#8220;diện tích&#8221; khi chọn mua căn hộ chung cư The Park Home">6
-														Chú ý về &#8220;diện tích&#8221; khi chọn mua căn hộ chung cư
-														The Park Home</a></div>
-												<a href="https://theparkhome.vn/6-chu-y-ve-dien-tich-khi-chon-mua-can-ho-chung-cu-the-park-home/"
-												   class="btn btn-primary link">Xem thêm</a>
-											</div>
-										</li><!--//.post-list_li -->
-										<li class="wow fadeInUp list_item_4 col-xs-6 col-sm-6 col-md-4"
-											data-wow-delay="0.5s">
-											<div class="content_item">
-												<figure class="featured-thumbnail thumbnail">
-													<a href="https://theparkhome.vn/cach-tinh-dien-tich-can-ho-chung-cu-the-park-home/">
-														<div class="ajax_image"
-															 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/cach-tinh-dien-tich-chung-cu-the-park-home-360x240.jpg"
-															 data-title="Cách tính Diện tích căn hộ Chung cư The Park Home"></div>
-													</a>
-												</figure>
-												<div class="post-list_h"><a class="post-title"
-																			href="https://theparkhome.vn/cach-tinh-dien-tich-can-ho-chung-cu-the-park-home/"
-																			rel="bookmark"
-																			title="Cách tính Diện tích căn hộ Chung cư The Park Home">Cách
-														tính Diện tích căn hộ Chung cư The Park Home</a></div>
-												<a href="https://theparkhome.vn/cach-tinh-dien-tich-can-ho-chung-cu-the-park-home/"
-												   class="btn btn-primary link">Xem thêm</a>
-											</div>
-										</li><!--//.post-list_li -->
-										<li class="wow fadeInUp list_item_5 col-xs-6 col-sm-6 col-md-4"
-											data-wow-delay="0.6s">
-											<div class="content_item">
-												<figure class="featured-thumbnail thumbnail">
-													<a href="https://theparkhome.vn/8-tieu-chi-khach-hang-chon-mua-can-ho-chung-cu-the-park-home/">
-														<div class="ajax_image"
-															 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/vi-tri-chung-cu-the-park-home-tien-ich-360x240.jpg"
-															 data-title="8 Tiêu chí Khách hàng quyết định chọn mua căn hộ chung cư The Park Home"></div>
-													</a>
-												</figure>
-												<div class="post-list_h"><a class="post-title"
-																			href="https://theparkhome.vn/8-tieu-chi-khach-hang-chon-mua-can-ho-chung-cu-the-park-home/"
-																			rel="bookmark"
-																			title="8 Tiêu chí Khách hàng quyết định chọn mua căn hộ chung cư The Park Home">8
-														Tiêu chí Khách hàng quyết định chọn mua căn hộ chung cư The Park
-														Home</a></div>
-												<a href="https://theparkhome.vn/8-tieu-chi-khach-hang-chon-mua-can-ho-chung-cu-the-park-home/"
-												   class="btn btn-primary link">Xem thêm</a>
-											</div>
-										</li><!--//.post-list_li -->
-										<li class="wow fadeInUp list_item_6 col-xs-6 col-sm-6 col-md-4"
-											data-wow-delay="0.7s">
-											<div class="content_item">
-												<figure class="featured-thumbnail thumbnail">
-													<a href="https://theparkhome.vn/khoi-cong-the-park-home-nha-o-can-bo-chien-sy-cuc-canh-sat-bao-ve-bo-cong-an/">
-														<div class="ajax_image"
-															 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/khoi-cong-the-park-home-nha-o-can-bo-chien-sy-cuc-canh-sat-bao-ve-bo-cong-an-2-360x240.jpg"
-															 data-title="Lễ khởi công The Park Home &#8211; Nhà ở cho Cán bộ Chiến sỹ Cục Cảnh sát Bảo vệ Bộ công an"></div>
-													</a>
-												</figure>
-												<div class="post-list_h"><a class="post-title"
-																			href="https://theparkhome.vn/khoi-cong-the-park-home-nha-o-can-bo-chien-sy-cuc-canh-sat-bao-ve-bo-cong-an/"
-																			rel="bookmark"
-																			title="Lễ khởi công The Park Home &#8211; Nhà ở cho Cán bộ Chiến sỹ Cục Cảnh sát Bảo vệ Bộ công an">Lễ
-														khởi công The Park Home &#8211; Nhà ở cho Cán bộ Chiến sỹ Cục
-														Cảnh sát Bảo vệ Bộ công an</a></div>
-												<a href="https://theparkhome.vn/khoi-cong-the-park-home-nha-o-can-bo-chien-sy-cuc-canh-sat-bao-ve-bo-cong-an/"
-												   class="btn btn-primary link">Xem thêm</a>
-											</div>
-										</li><!--//.post-list_li -->
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                <?php endif; ?>
+<!--				<div id="pg-27-7" class="panel-grid panel-has-style">-->
+<!--					<div id="thuvienanh" class="panel-row-style panel-row-style-for-27-7">-->
+<!--						<div id="pgc-27-7-0" class="panel-grid-cell">-->
+<!--							<div id="panel-27-7-0-0"-->
+<!--								 class="so-panel widget widget_black-studio-tinymce widget_black_studio_tinymce panel-first-child"-->
+<!--								 data-index="8">-->
+<!--								<div class="container text_custom panel-widget-style panel-widget-style-for-27-7-0-0">-->
+<!--									<div class="widget-title"><span>Thư viện ảnh</span></div>-->
+<!--									<div class="textwidget">-->
+<!--										<p style="text-align: justify;">-->
+<!--											<span-->
+<!--													style="font-size: 14px;">-->
+<!--												<strong>-->
+<!--													<a href="--><?//= get_bloginfo('url') ?><!--">CHUNG CƯ THE PARK HOME</a> - Nhà ở CBCS Cục Cảnh sát Bảo vệ Bộ công an</strong> là một trong những dự án sở hữu vị trí đắc địa tại Cầu giấy cũng như của Hà Nội. Tọa lạc ngay tại Lô N02, Ô đất D12 – Khu đô thị mới Cầu Giấy – Q. Cầu Giấy – Hà Nội nằm trên trục đường trung tâm và đẹp nhất khu vực quận Cầu Giấy hiện nay.</span>-->
+<!--										</p>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<div id="panel-27-7-0-1"-->
+<!--								 class="so-panel widget widget_siteorigin-panels-builder panel-last-child"-->
+<!--								 data-index="9">-->
+<!--								<div class="container">-->
+<!--									<div class="panel-layout">-->
+<!--										<div class="panel-grid panel-no-style row">-->
+<!--											<div class="panel-grid-cell col-xs-6 col-sm-6">-->
+<!--												<div id="panel-w5db151fe0c779-0-0-0"-->
+<!--													 class="widget_text so-panel widget widget_custom_html panel-first-child panel-last-child"-->
+<!--													 data-index="0">-->
+<!--													<div class="textwidget custom-html-widget">-->
+<!--														<iframe width="560" height="360"-->
+<!--																src="https://www.youtube.com/embed/kz8zeYgptIc"-->
+<!--																frameborder="0"-->
+<!--																allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"-->
+<!--																allowfullscreen></iframe>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											<div class="panel-grid-cell col-xs-6 col-sm-6">-->
+<!--												<div id="panel-w5db151fe0c779-0-1-0"-->
+<!--													 class="so-panel widget widget_postcustom my_posts_type_widget panel-first-child panel-last-child"-->
+<!--													 data-index="1">-->
+<!--													<ul class='default_post post-list unstyled'>-->
+<!--														<li class="wow fadeInUp list_item_1 col-xs-6 col-sm-6 col-md-6"-->
+<!--															data-wow-delay="0.2s">-->
+<!--															<div class="content_item">-->
+<!--																<figure class="featured-thumbnail thumbnail">-->
+<!--																	<a href="https://theparkhome.vn/mau-can-ho-2-ngu-the-park-home/">-->
+<!--																		<div class="ajax_image"-->
+<!--																			 data-image="https://theparkhome.vn/wp-content/uploads/2018/10/can-ho-2-ngu-chung-cu-the-park-home-1-360x240.jpg"-->
+<!--																			 data-title="Mẫu căn hộ cao cấp 2 ngủ"></div>-->
+<!--																	</a>-->
+<!--																</figure>-->
+<!--																<div class="post-list_h"><a class="post-title"-->
+<!--																							href="https://theparkhome.vn/mau-can-ho-2-ngu-the-park-home/"-->
+<!--																							rel="bookmark"-->
+<!--																							title="Mẫu căn hộ cao cấp 2 ngủ">Mẫu-->
+<!--																		căn hộ cao cấp 2 ngủ</a></div>-->
+<!--															</div>-->
+<!--														</li><!--//.post-list_li -->-->
+<!--														<li class="wow fadeInUp list_item_2 col-xs-6 col-sm-6 col-md-6"-->
+<!--															data-wow-delay="0.3s">-->
+<!--															<div class="content_item">-->
+<!--																<figure class="featured-thumbnail thumbnail">-->
+<!--																	<a href="https://theparkhome.vn/mau-can-ho-3-ngu-the-park-home/">-->
+<!--																		<div class="ajax_image"-->
+<!--																			 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-ho-3-ngu-2-360x240.jpg"-->
+<!--																			 data-title="Mẫu căn hộ cao cấp 3 ngủ"></div>-->
+<!--																	</a>-->
+<!--																</figure>-->
+<!--																<div class="post-list_h"><a class="post-title"-->
+<!--																							href="https://theparkhome.vn/mau-can-ho-3-ngu-the-park-home/"-->
+<!--																							rel="bookmark"-->
+<!--																							title="Mẫu căn hộ cao cấp 3 ngủ">Mẫu-->
+<!--																		căn hộ cao cấp 3 ngủ</a></div>-->
+<!--															</div>-->
+<!--														</li><!--//.post-list_li -->-->
+<!--														<li class="wow fadeInUp list_item_3 col-xs-6 col-sm-6 col-md-6"-->
+<!--															data-wow-delay="0.4s">-->
+<!--															<div class="content_item">-->
+<!--																<figure class="featured-thumbnail thumbnail">-->
+<!--																	<a href="https://theparkhome.vn/mau-can-ho-3-ngu-the-park-home-2/">-->
+<!--																		<div class="ajax_image"-->
+<!--																			 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/can-ho-3-ngu-chung-cu-the-park-home-4-360x240.jpg"-->
+<!--																			 data-title="Mẫu căn hộ cao cấp 3 ngủ"></div>-->
+<!--																	</a>-->
+<!--																</figure>-->
+<!--																<div class="post-list_h"><a class="post-title"-->
+<!--																							href="https://theparkhome.vn/mau-can-ho-3-ngu-the-park-home-2/"-->
+<!--																							rel="bookmark"-->
+<!--																							title="Mẫu căn hộ cao cấp 3 ngủ">Mẫu-->
+<!--																		căn hộ cao cấp 3 ngủ</a></div>-->
+<!--															</div>-->
+<!--														</li><!--//.post-list_li -->-->
+<!--														<li class="wow fadeInUp list_item_4 col-xs-6 col-sm-6 col-md-6"-->
+<!--															data-wow-delay="0.5s">-->
+<!--															<div class="content_item">-->
+<!--																<figure class="featured-thumbnail thumbnail">-->
+<!--																	<a href="https://theparkhome.vn/mau-can-ho-cao-cap-4-ngu-the-park-home/">-->
+<!--																		<div class="ajax_image"-->
+<!--																			 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/chung-cu-the-park-home-can-4-ngu-1-360x240.jpg"-->
+<!--																			 data-title="Mẫu căn hộ cao cấp 4 ngủ"></div>-->
+<!--																	</a>-->
+<!--																</figure>-->
+<!--																<div class="post-list_h"><a class="post-title"-->
+<!--																							href="https://theparkhome.vn/mau-can-ho-cao-cap-4-ngu-the-park-home/"-->
+<!--																							rel="bookmark"-->
+<!--																							title="Mẫu căn hộ cao cấp 4 ngủ">Mẫu-->
+<!--																		căn hộ cao cấp 4 ngủ</a></div>-->
+<!--															</div>-->
+<!--														</li><!--//.post-list_li -->-->
+<!--													</ul>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div id="pg-27-8" class="panel-grid panel-has-style">-->
+<!--					<div id="new_home" class="panel-row-style panel-row-style-for-27-8">-->
+<!--						<div id="pgc-27-8-0" class="panel-grid-cell">-->
+<!--							<div id="panel-27-8-0-0"-->
+<!--								 class="so-panel widget widget_postcustom my_posts_type_widget panel-first-child panel-last-child"-->
+<!--								 data-index="10">-->
+<!--								<div class="container panel-widget-style panel-widget-style-for-27-8-0-0">-->
+<!--									<div class="widget-title"><span>Tin tức, sự kiện</span></div>-->
+<!--									<ul class='default_post post-list unstyled row'>-->
+<!--										<li class="wow fadeInUp list_item_1 col-xs-6 col-sm-6 col-md-4"-->
+<!--											data-wow-delay="0.2s">-->
+<!--											<div class="content_item">-->
+<!--												<figure class="featured-thumbnail thumbnail">-->
+<!--													<a href="https://theparkhome.vn/mua-can-ho-chung-cu-the-park-home-o-dau/">-->
+<!--														<div class="ajax_image"-->
+<!--															 data-image="https://theparkhome.vn/wp-content/uploads/2019/12/mua-can-ho-the-park-home-o-dau-360x240.jpg"-->
+<!--															 data-title="Nên tìm hiểu và mua căn hộ chung cư The Park Home ở đâu ?"></div>-->
+<!--													</a>-->
+<!--												</figure>-->
+<!--												<div class="post-list_h"><a class="post-title"-->
+<!--																			href="https://theparkhome.vn/mua-can-ho-chung-cu-the-park-home-o-dau/"-->
+<!--																			rel="bookmark"-->
+<!--																			title="Nên tìm hiểu và mua căn hộ chung cư The Park Home ở đâu ?">Nên-->
+<!--														tìm hiểu và mua căn hộ chung cư The Park Home ở đâu ?</a></div>-->
+<!--												<a href="https://theparkhome.vn/mua-can-ho-chung-cu-the-park-home-o-dau/"-->
+<!--												   class="btn btn-primary link">Xem thêm</a>-->
+<!--											</div>-->
+<!--										</li><!--//.post-list_li -->-->
+<!--										<li class="wow fadeInUp list_item_2 col-xs-6 col-sm-6 col-md-4"-->
+<!--											data-wow-delay="0.3s">-->
+<!--											<div class="content_item">-->
+<!--												<figure class="featured-thumbnail thumbnail">-->
+<!--													<a href="https://theparkhome.vn/top-10-chung-cu-cao-cap-quan-cau-giay-dang-mua-nhat-2020/">-->
+<!--														<div class="ajax_image"-->
+<!--															 data-image="https://theparkhome.vn/wp-content/uploads/2019/11/top-10-chung-cu-cao-cap-quan-cau-giay-dang-mua-nhat-2020-360x240.jpg"-->
+<!--															 data-title="TOP 10 chung cư &#8220;Cao Cấp&#8221; quận Cầu Giấy đáng mua nhất 2020"></div>-->
+<!--													</a>-->
+<!--												</figure>-->
+<!--												<div class="post-list_h"><a class="post-title"-->
+<!--																			href="https://theparkhome.vn/top-10-chung-cu-cao-cap-quan-cau-giay-dang-mua-nhat-2020/"-->
+<!--																			rel="bookmark"-->
+<!--																			title="TOP 10 chung cư &#8220;Cao Cấp&#8221; quận Cầu Giấy đáng mua nhất 2020">TOP-->
+<!--														10 chung cư &#8220;Cao Cấp&#8221; quận Cầu Giấy đáng mua nhất-->
+<!--														2020</a></div>-->
+<!--												<a href="https://theparkhome.vn/top-10-chung-cu-cao-cap-quan-cau-giay-dang-mua-nhat-2020/"-->
+<!--												   class="btn btn-primary link">Xem thêm</a>-->
+<!--											</div>-->
+<!--										</li><!--//.post-list_li -->-->
+<!--										<li class="wow fadeInUp list_item_3 col-xs-6 col-sm-6 col-md-4"-->
+<!--											data-wow-delay="0.4s">-->
+<!--											<div class="content_item">-->
+<!--												<figure class="featured-thumbnail thumbnail">-->
+<!--													<a href="https://theparkhome.vn/6-chu-y-ve-dien-tich-khi-chon-mua-can-ho-chung-cu-the-park-home/">-->
+<!--														<div class="ajax_image"-->
+<!--															 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/dien-tich-can-ho-chung-cu-the-park-home-360x240.jpg"-->
+<!--															 data-title="6 Chú ý về &#8220;diện tích&#8221; khi chọn mua căn hộ chung cư The Park Home"></div>-->
+<!--													</a>-->
+<!--												</figure>-->
+<!--												<div class="post-list_h"><a class="post-title"-->
+<!--																			href="https://theparkhome.vn/6-chu-y-ve-dien-tich-khi-chon-mua-can-ho-chung-cu-the-park-home/"-->
+<!--																			rel="bookmark"-->
+<!--																			title="6 Chú ý về &#8220;diện tích&#8221; khi chọn mua căn hộ chung cư The Park Home">6-->
+<!--														Chú ý về &#8220;diện tích&#8221; khi chọn mua căn hộ chung cư-->
+<!--														The Park Home</a></div>-->
+<!--												<a href="https://theparkhome.vn/6-chu-y-ve-dien-tich-khi-chon-mua-can-ho-chung-cu-the-park-home/"-->
+<!--												   class="btn btn-primary link">Xem thêm</a>-->
+<!--											</div>-->
+<!--										</li><!--//.post-list_li -->-->
+<!--										<li class="wow fadeInUp list_item_4 col-xs-6 col-sm-6 col-md-4"-->
+<!--											data-wow-delay="0.5s">-->
+<!--											<div class="content_item">-->
+<!--												<figure class="featured-thumbnail thumbnail">-->
+<!--													<a href="https://theparkhome.vn/cach-tinh-dien-tich-can-ho-chung-cu-the-park-home/">-->
+<!--														<div class="ajax_image"-->
+<!--															 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/cach-tinh-dien-tich-chung-cu-the-park-home-360x240.jpg"-->
+<!--															 data-title="Cách tính Diện tích căn hộ Chung cư The Park Home"></div>-->
+<!--													</a>-->
+<!--												</figure>-->
+<!--												<div class="post-list_h"><a class="post-title"-->
+<!--																			href="https://theparkhome.vn/cach-tinh-dien-tich-can-ho-chung-cu-the-park-home/"-->
+<!--																			rel="bookmark"-->
+<!--																			title="Cách tính Diện tích căn hộ Chung cư The Park Home">Cách-->
+<!--														tính Diện tích căn hộ Chung cư The Park Home</a></div>-->
+<!--												<a href="https://theparkhome.vn/cach-tinh-dien-tich-can-ho-chung-cu-the-park-home/"-->
+<!--												   class="btn btn-primary link">Xem thêm</a>-->
+<!--											</div>-->
+<!--										</li><!--//.post-list_li -->-->
+<!--										<li class="wow fadeInUp list_item_5 col-xs-6 col-sm-6 col-md-4"-->
+<!--											data-wow-delay="0.6s">-->
+<!--											<div class="content_item">-->
+<!--												<figure class="featured-thumbnail thumbnail">-->
+<!--													<a href="https://theparkhome.vn/8-tieu-chi-khach-hang-chon-mua-can-ho-chung-cu-the-park-home/">-->
+<!--														<div class="ajax_image"-->
+<!--															 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/vi-tri-chung-cu-the-park-home-tien-ich-360x240.jpg"-->
+<!--															 data-title="8 Tiêu chí Khách hàng quyết định chọn mua căn hộ chung cư The Park Home"></div>-->
+<!--													</a>-->
+<!--												</figure>-->
+<!--												<div class="post-list_h"><a class="post-title"-->
+<!--																			href="https://theparkhome.vn/8-tieu-chi-khach-hang-chon-mua-can-ho-chung-cu-the-park-home/"-->
+<!--																			rel="bookmark"-->
+<!--																			title="8 Tiêu chí Khách hàng quyết định chọn mua căn hộ chung cư The Park Home">8-->
+<!--														Tiêu chí Khách hàng quyết định chọn mua căn hộ chung cư The Park-->
+<!--														Home</a></div>-->
+<!--												<a href="https://theparkhome.vn/8-tieu-chi-khach-hang-chon-mua-can-ho-chung-cu-the-park-home/"-->
+<!--												   class="btn btn-primary link">Xem thêm</a>-->
+<!--											</div>-->
+<!--										</li><!--//.post-list_li -->-->
+<!--										<li class="wow fadeInUp list_item_6 col-xs-6 col-sm-6 col-md-4"-->
+<!--											data-wow-delay="0.7s">-->
+<!--											<div class="content_item">-->
+<!--												<figure class="featured-thumbnail thumbnail">-->
+<!--													<a href="https://theparkhome.vn/khoi-cong-the-park-home-nha-o-can-bo-chien-sy-cuc-canh-sat-bao-ve-bo-cong-an/">-->
+<!--														<div class="ajax_image"-->
+<!--															 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/khoi-cong-the-park-home-nha-o-can-bo-chien-sy-cuc-canh-sat-bao-ve-bo-cong-an-2-360x240.jpg"-->
+<!--															 data-title="Lễ khởi công The Park Home &#8211; Nhà ở cho Cán bộ Chiến sỹ Cục Cảnh sát Bảo vệ Bộ công an"></div>-->
+<!--													</a>-->
+<!--												</figure>-->
+<!--												<div class="post-list_h"><a class="post-title"-->
+<!--																			href="https://theparkhome.vn/khoi-cong-the-park-home-nha-o-can-bo-chien-sy-cuc-canh-sat-bao-ve-bo-cong-an/"-->
+<!--																			rel="bookmark"-->
+<!--																			title="Lễ khởi công The Park Home &#8211; Nhà ở cho Cán bộ Chiến sỹ Cục Cảnh sát Bảo vệ Bộ công an">Lễ-->
+<!--														khởi công The Park Home &#8211; Nhà ở cho Cán bộ Chiến sỹ Cục-->
+<!--														Cảnh sát Bảo vệ Bộ công an</a></div>-->
+<!--												<a href="https://theparkhome.vn/khoi-cong-the-park-home-nha-o-can-bo-chien-sy-cuc-canh-sat-bao-ve-bo-cong-an/"-->
+<!--												   class="btn btn-primary link">Xem thêm</a>-->
+<!--											</div>-->
+<!--										</li><!--//.post-list_li -->-->
+<!--									</ul>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
 			</div>
 		</div>
 	</div>
