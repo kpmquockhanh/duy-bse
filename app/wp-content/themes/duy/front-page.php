@@ -1,8 +1,5 @@
 <?php
-//	echo "<pre>";
-//	var_dump(get_pages());
-//	echo "</pre>";
-//die;
+
 ?>
 <?php get_header(); ?>
 	<body class="home desktop">
