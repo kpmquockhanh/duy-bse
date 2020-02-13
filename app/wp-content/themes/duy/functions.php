@@ -1,5 +1,13 @@
 <?php
-
+register_sidebar(array(
+    'name' => 'Block after content',
+    'id' => 'block-after-content',
+    'description' => 'Khu vực sidebar hiển thị dưới mỗi bài viết',
+    'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+    'after_widget' => '</aside>',
+    'before_title' => '<h1 class="widget-title">',
+    'after_title' => '</h1>'
+));
 function register_my_menu() {
 	register_nav_menu('header-menu',__( 'Header Menu' ));
 }
@@ -67,3 +75,76 @@ function add_your_setting($wp_customize) {
 
 }
 add_action( 'customize_register', 'add_your_setting' );
+
+/*
+ * Khởi tạo widget item
+ */
+add_action( 'widgets_init', 'create_custom_widget' );
+function create_custom_widget()
+{
+    register_widget('slide_img_widget');
+}
+
+/**
+ * Tạo class slide_img_widgets
+ */
+class slide_img_widget extends WP_Widget {
+
+    /**
+     * Thiết lập widget: đặt tên, base ID
+     */
+    function __construct() {
+        parent::__construct(
+            'slide-custom-widget',
+            'Custom slide image widget'
+        );
+    }
+
+    /**
+     * Tạo form option cho widget
+     */
+    function form( $instance ) {
+        //Tạo biến riêng cho giá trị mặc định trong mảng $default
+        $title = esc_attr( $instance['title'] );
+
+        //Hiển thị form trong option của widget
+
+        ?>
+        <div class="text-widget-fields">
+            <p>
+                <label for="title">Title:</label>
+                <input id="title" type="text" class="widefat title">
+            </p>
+            <div>
+
+            </div>
+        </div>
+        <?php
+    }
+
+    /**
+     * save widget form
+     */
+
+    function update( $new_instance, $old_instance ) {
+
+    }
+
+    /**
+     * Show widget
+     */
+
+    function widget( $args, $instance ) {
+        $title = apply_filters( 'widget_title', $instance[ 'title' ] );
+        $blog_title = get_bloginfo( 'name' );
+        $tagline = get_bloginfo( 'description' );
+
+        echo $args['before_widget'] . $args['before_title'] . $title . $args['after_title']; ?>
+
+        <p><strong>Site Name:</strong> <?php echo $blog_title ?></p>
+        <p><strong>Tagline:</strong> <?php echo $tagline ?></p>
+
+        <?php echo $args['after_widget'];
+    }
+
+}
