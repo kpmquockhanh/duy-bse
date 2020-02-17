@@ -291,7 +291,7 @@
 						</div>
 					</div>
 				</div>
-                <?php dynamic_sidebar('block-after-content'); ?>
+                <?php dynamic_sidebar('custom-gallery'); ?>
                 <?php
                 $chudautu = get_posts( array(
                     'name' => 'chu-dau-tu'

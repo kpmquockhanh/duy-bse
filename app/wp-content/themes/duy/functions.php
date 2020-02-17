@@ -1,10 +1,10 @@
 <?php
 register_sidebar(array(
-    'name' => 'Block after content',
-    'id' => 'block-after-content',
-    'description' => 'Khu vực sidebar hiển thị dưới mỗi bài viết',
-    'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-    'after_widget' => '</aside>',
+    'name' => 'Custom gallery',
+    'id' => 'custom-gallery',
+    'description' => 'Tùy chọn slide hình ảnh',
+    'before_widget' => '<div id="tienich" class="widget %2$s panel-grid panel-has-style">',
+    'after_widget' => '</div>',
     'before_title' => '<h1 class="widget-title">',
     'after_title' => '</h1>'
 ));
@@ -190,14 +190,16 @@ class custom_media_widget extends WP_Widget_Media {
      * @return void
      */
     public function render_media( $instance ) {
-        $instance = array_merge( wp_list_pluck( $this->get_instance_schema(), 'default' ), $instance );
+        $title = apply_filters('widget_title', $instance['title']);
+		$ids = $instance['ids'];
+//        $instance = array_merge( wp_list_pluck( $this->get_instance_schema(), 'default' ), $instance );
 
-        $shortcode_atts = array_merge(
-            $instance,
-            array(
-                'link' => $instance['link_type'],
-            )
-        );
+//        $shortcode_atts = array_merge(
+//            $instance,
+//            array(
+//                'link' => $instance['link_type'],
+//            )
+//        );
 
         // @codeCoverageIgnoreStart
         if ( $instance['orderby_random'] ) {
@@ -205,7 +207,31 @@ class custom_media_widget extends WP_Widget_Media {
         }
 
         // @codeCoverageIgnoreEnd
-        echo gallery_shortcode( $shortcode_atts );
+//        echo gallery_shortcode( $shortcode_atts );
+		?>
+		<ul class="list-utility default_post post-list unstyled">
+			<?php foreach ($ids as $id): ?>
+			<li>
+				<div class="content_item">
+					<figure class="featured-thumbnail thumbnail">
+						<a href="<?= get_permalink(get_post_ancestors($id)[0] ?? null) ?>" tabindex="0">
+							<div class="ajax_image">
+								<img src="<?= wp_get_attachment_url($id) ?>"
+									 alt="">
+							</div>
+						</a>
+					</figure>
+					<div class="post-list_h">
+						<a class="post-title" href="<?= get_permalink(get_post_ancestors($id)[0] ?? null) ?>"
+						   rel="bookmark" title="" tabindex="0">
+							<?= get_the_title(get_post_ancestors($id)[0] ?? null) ?>
+						</a>
+					</div>
+				</div>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+		<?php
     }
 
     /**
@@ -336,6 +362,7 @@ class custom_media_widget extends WP_Widget_Media {
         }
         return false;
     }
+
 }
 
 
@@ -362,7 +389,12 @@ class slide_img_widget extends WP_Widget
     function form($instance)
     {
         //Tạo biến riêng cho giá trị mặc định trong mảng $default
-        $title = esc_attr($instance['title']);
+		if(isset($instance['title'])) {
+        	$title = esc_attr($instance['title']);
+		}
+		if (isset($instance['images'])) {
+        	$images = $instance['images'];
+		}
 
         //Hiển thị form trong option của widget
 
@@ -374,69 +406,13 @@ class slide_img_widget extends WP_Widget
 					   name="<?= $this->get_field_name('title'); ?>" type="text" value="<?= esc_attr($title); ?>"/>
 			</p>
 			<p>
-<!--				<label for="--><?php //echo $this->get_field_id('image_uri'); ?><!--">Image</label><br/>-->
+				<input class="widefat" id="<?= $this->get_field_id('images'); ?>"
+					   name="<?= $this->get_field_name('images'); ?>" type="file" multiple value="<?= $images; ?>"/>
+				<div id="myplugin-placeholder"></div>
 				<input type="button" value="<?php _e( 'Upload Image'); ?>" class="button custom_media_upload" id="myplugin-change-image"/>
 			</p>
 		</div>
-		<script>
-            jQuery(document).ready( function( $ ) {
 
-                let myplugin_media_upload;
-
-                jQuery('body').on( 'click', '#myplugin-change-image', function(e) {
-                    e.preventDefault();
-
-                    // If the uploader object has already been created, reopen the dialog
-                    if( myplugin_media_upload ) {
-                        myplugin_media_upload.open();
-                        return;
-                    }
-
-                    // Extend the wp.media object
-                    myplugin_media_upload = wp.media.frames.file_frame = wp.media({
-                        //button_text set by wp_localize_script()
-                        title: 'button_text.title',
-                        button: { text: 'button_text.button' },
-                        multiple: true //allowing for multiple image selection
-                    });
-
-                    /**
-                     *THE KEY BUSINESS
-                     *When multiple images are selected, get the multiple attachment objects
-                     *and convert them into a usable array of attachments
-                     */
-                    myplugin_media_upload.on( 'select', function(){
-
-                        var attachments = myplugin_media_upload.state().get('selection').map(function( attachment ) {
-							attachment.toJSON();
-							return attachment;
-						});
-
-                        //loop through the array and do things with each attachment
-                        for (let i = 0; i < attachments.length; ++i) {
-                            //sample function 1: add image preview
-                            $('#myplugin-placeholder').after(
-                                '<div class="myplugin-image-preview"><img src="' +
-                                attachments[i].attributes.url + '" ></div>'
-                            );
-
-                            //sample function 2: add hidden input for each image
-                            $('#myplugin-placeholder').after(
-                                '<input id="myplugin-image-input' +
-                                attachments[i].id + '" type="hidden" name="myplugin_attachment_id_array[]"  value="' +
-                            attachments[i].id + '">'
-                        )
-
-                        }
-
-                    });
-
-                    myplugin_media_upload.open();
-
-                });
-
-            });
-		</script>
         <?php
     }
 
