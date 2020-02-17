@@ -103,8 +103,7 @@
                                                                 <?php if($image = $room_page->{"hinh_anh_can_ho$i"} ) : ?>
 																	<li>
 																		<div class="ajax_image"
-																			 data-image="<?=
-																			 ($room_page->image) ?>"
+																			 data-image="<?= wp_get_attachment_image_url($image, 'full') ?>"
 																			 data-title="Căn hộ 2 phòng ngủ">
 																		</div>
 																	</li>
@@ -131,12 +130,12 @@
 															<div class="matbang_vitri">
 																<div class="matbang">
 																	<div class="ajax_image"
-																		 data-image="<?= wp_get_attachment_image_url($room_page->mat_bang) ?>"
+																		 data-image="<?= wp_get_attachment_image_url($room_page->mat_bang, 'full') ?>"
 																		 data-title="<?= get_the_title($room_page->ID) ?>-matbang"></div>
 																</div>
 																<div class="vitri">
 																	<div class="ajax_image"
-																		 data-image="<?= wp_get_attachment_image_url($room_page->vi_tri) ?>"
+																		 data-image="<?= wp_get_attachment_image_url($room_page->vi_tri, 'full') ?>"
 																		 data-title="<?= get_the_title($room_page->ID) ?>-vitri">
 																	</div>
 																</div>
