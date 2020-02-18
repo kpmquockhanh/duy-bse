@@ -308,7 +308,7 @@
 									<div id="aio-widget-aio_single_image-2720007-template" class="aio_single_image">
 										<div class="content_image">
 											<figure class="featured-thumbnail thumbnail">
-												<a href="https://theparkhome.vn/chu-dau-tu/">
+												<a href="<?= get_permalink($chudautu->ID) ?>">
 													<div class="ajax_image"
 														 data-image="<?= get_the_post_thumbnail_url($chudautu->ID) ?>"
 														 data-title="aio_single_image_aio-widget-aio_single_image-2720007-template"></div>

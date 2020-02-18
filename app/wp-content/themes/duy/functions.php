@@ -49,6 +49,26 @@ add_action('wp_enqueue_scripts', 'add_theme_scripts');
 // Add site setting
 function add_your_setting($wp_customize)
 {
+    $wp_customize->add_setting('owner_logo');
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'owner_logo',
+            array(
+                'label' => 'Logo trang chủ',
+                'section' => 'title_tagline',
+                'settings' => 'owner_logo',
+            )
+        )
+    );
+
+    $wp_customize->add_setting('owner_footer_logo');
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'owner_footer_logo',
+            array(
+                'label' => 'Logo trang chủ footer',
+                'section' => 'title_tagline',
+                'settings' => 'owner_footer_logo',
+            )
+        )
+    );
+
     $wp_customize->add_setting('homepage_banner');
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'homepage_banner',
             array(
@@ -443,55 +463,6 @@ class slide_img_widget extends WP_Widget
         // echo $args['before_widget'] . $args['before_title'] . $title . $args['after_title'];
         ?>
 
-		<div class="panel-grid panel-has-style">
-			<div id="tienich" class="panel-row-style">
-				<div class="panel-grid-cell">
-					<div id="panel-27-5-0-0"
-						 class="so-panel widget widget_postcustom my_posts_type_widget panel-first-child panel-last-child"
-						 data-index="6">
-						<div class="widget-title"><span><?= $title ?></span></div>
-						<ul class="list-utility default_post post-list unstyled">
-							<li>
-								<div class="content_item">
-									<figure class="featured-thumbnail thumbnail">
-										<a href="https://theparkhome.vn/be-boi-bon-mua/" tabindex="0">
-											<div class="ajax_image">
-												<img src="https://theparkhome.vn/wp-content/uploads/2018/10/tien-ich-chung-cu-the-park-home-be-boi-min.jpg"
-													 alt="BỂ BƠI BỐN MÙA">
-											</div>
-										</a>
-									</figure>
-									<div class="post-list_h">
-										<a class="post-title" href="https://theparkhome.vn/be-boi-bon-mua/"
-										   rel="bookmark" title="BỂ BƠI BỐN MÙA" tabindex="0">
-											BỂ BƠI BỐN MÙA
-										</a>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="content_item">
-									<figure class="featured-thumbnail thumbnail">
-										<a href="https://theparkhome.vn/be-boi-bon-mua/" tabindex="0">
-											<div class="ajax_image">
-												<img src="https://theparkhome.vn/wp-content/uploads/2018/10/tien-ich-chung-cu-the-park-home-be-boi-min.jpg"
-													 alt="BỂ BƠI BỐN MÙA">
-											</div>
-										</a>
-									</figure>
-									<div class="post-list_h">
-										<a class="post-title" href="https://theparkhome.vn/be-boi-bon-mua/"
-										   rel="bookmark" title="BỂ BƠI BỐN MÙA" tabindex="0">
-											BỂ BƠI BỐN MÙA
-										</a>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
 
         <?php echo $args['after_widget'];
     }

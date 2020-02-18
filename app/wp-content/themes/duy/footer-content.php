@@ -33,7 +33,7 @@
 								<div class="content_image">
 									<figure class="featured-thumbnail thumbnail">
 										<div class="ajax_image"
-											 data-image="https://theparkhome.vn/wp-content/uploads/2019/10/logo-handico-52.jpg"
+											 data-image="<?= get_theme_mod('owner_footer_logo') ?>"
 											 data-title="aio_single_image_aio-widget-aio_single_image-2720007-template"></div>
 									</figure>
 									<div class="aio_image_meta">
@@ -91,7 +91,7 @@
 <div id="aio_backtop" class="visible-desktop"></div>
 <div class="fixed_custom_contact">
 	<ul>
-		<li class="chat_facebook"><a href="https://m.me/Uocdn" target="_blank"></a></li>
+		<li class="chat_facebook"><a href="https://m.me/malphie1" target="_blank"></a></li>
 		<li class="call_zalo"><a href="http://zalo.me/<?= get_theme_mod('owner_phone')?>" target="_blank"><?= get_theme_mod('owner_phone')?></a></li>
 		<li class="call_phone">
 			<a href="tel:<?= get_theme_mod('owner_phone')?>">

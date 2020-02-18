@@ -2,10 +2,10 @@
 	<div class="midle_header">
 		<div class="container">
 			<div class="logo">
-				<a href="https://theparkhome.vn/" class="logo_link">
+				<a href="<?= get_bloginfo('url'); ?>" class="logo_link">
 					<img class="logo_img"
-					     src="https://theparkhome.vn/wp-content/uploads/2019/10/logo-the-park-home.jpg"
-					     alt="theparkhome.vn">
+					     src="<?= get_theme_mod('owner_logo') ?>"
+					     alt="<?= get_bloginfo('url'); ?>">
 				</a>
 			</div>
 			<div class="hotline_number">
